@@ -1,0 +1,18 @@
+ALTER TABLE recipes ADD COLUMN total_seconds INTEGER CHECK(total_seconds>=0);
+ALTER TABLE recipes ADD COLUMN image_url TEXT;
+ALTER TABLE recipes ADD COLUMN source_rating REAL;
+ALTER TABLE recipes ADD COLUMN source_review_count INTEGER;
+ALTER TABLE recipes ADD COLUMN nutrition_json TEXT;
+ALTER TABLE recipes ADD COLUMN servings TEXT;
+CREATE INDEX idx_recipes_time ON recipes(status,total_seconds,id);
+CREATE TABLE auth_sessions(token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, expires_at INTEGER NOT NULL);
+CREATE TABLE cooking_sessions(id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), recipe_id INTEGER NOT NULL REFERENCES recipes(id), current_step INTEGER NOT NULL DEFAULT 1 CHECK(current_step>0), status TEXT NOT NULL DEFAULT 'in_progress' CHECK(status IN ('in_progress','paused','completed','cancelled')), version INTEGER NOT NULL DEFAULT 1, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX idx_cooking_user ON cooking_sessions(user_id,id);
+CREATE TABLE import_runs(id INTEGER PRIMARY KEY, started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, status TEXT NOT NULL, report_json TEXT);
+CREATE TABLE quarantined_reviews(id INTEGER PRIMARY KEY, reason TEXT NOT NULL, raw_json TEXT NOT NULL);
+CREATE VIRTUAL TABLE recipe_search USING fts5(name,content='recipes',content_rowid='id');
+CREATE TRIGGER recipes_search_insert AFTER INSERT ON recipes BEGIN INSERT INTO recipe_search(rowid,name) VALUES(new.id,new.name); END;
+CREATE TRIGGER recipes_search_delete AFTER DELETE ON recipes BEGIN INSERT INTO recipe_search(recipe_search,rowid,name) VALUES('delete',old.id,old.name); END;
+CREATE TRIGGER recipes_search_update AFTER UPDATE OF name ON recipes BEGIN INSERT INTO recipe_search(recipe_search,rowid,name) VALUES('delete',old.id,old.name); INSERT INTO recipe_search(rowid,name) VALUES(new.id,new.name); END;
+INSERT INTO recipe_search(recipe_search) VALUES('rebuild');
+INSERT INTO schema_migrations(version) VALUES(2);

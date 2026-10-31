@@ -1,0 +1,18 @@
+CREATE TABLE schema_migrations(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE);
+CREATE TABLE recipes(id INTEGER PRIMARY KEY, name TEXT NOT NULL, description TEXT, category_id INTEGER REFERENCES categories(id), status TEXT NOT NULL DEFAULT 'published' CHECK(status IN ('draft','published','archived')));
+CREATE TABLE recipe_steps(recipe_id INTEGER NOT NULL REFERENCES recipes(id) ON DELETE CASCADE, position INTEGER NOT NULL CHECK(position>0), instruction TEXT NOT NULL, PRIMARY KEY(recipe_id,position));
+CREATE TABLE ingredients(id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE);
+CREATE TABLE recipe_ingredients(recipe_id INTEGER NOT NULL REFERENCES recipes(id) ON DELETE CASCADE, position INTEGER NOT NULL CHECK(position>0), ingredient_id INTEGER NOT NULL REFERENCES ingredients(id), quantity TEXT, PRIMARY KEY(recipe_id,position));
+CREATE TABLE users(id INTEGER PRIMARY KEY, email TEXT NOT NULL UNIQUE, password_hash TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'user' CHECK(role IN ('user','admin')));
+CREATE TABLE favorite_folders(id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), name TEXT NOT NULL, UNIQUE(user_id,name));
+CREATE TABLE favorites(folder_id INTEGER NOT NULL REFERENCES favorite_folders(id) ON DELETE CASCADE, recipe_id INTEGER NOT NULL REFERENCES recipes(id), PRIMARY KEY(folder_id,recipe_id));
+CREATE TABLE reviews(id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), recipe_id INTEGER NOT NULL REFERENCES recipes(id), rating INTEGER CHECK(rating BETWEEN 1 AND 5), body TEXT, CHECK(rating IS NOT NULL OR length(trim(body))>0), UNIQUE(user_id,recipe_id));
+CREATE TABLE source_recipe_records(recipe_id INTEGER PRIMARY KEY REFERENCES recipes(id), raw_json TEXT NOT NULL);
+CREATE TABLE source_reviews(id INTEGER PRIMARY KEY, recipe_id INTEGER NOT NULL REFERENCES recipes(id), source_author_id TEXT, raw_rating INTEGER, rating INTEGER CHECK(rating BETWEEN 1 AND 5), body TEXT, raw_json TEXT NOT NULL);
+CREATE INDEX idx_recipes_status_id ON recipes(status,id);
+CREATE INDEX idx_recipes_category ON recipes(category_id);
+CREATE INDEX idx_recipe_ingredients_ingredient ON recipe_ingredients(ingredient_id);
+CREATE INDEX idx_reviews_recipe ON reviews(recipe_id);
+CREATE INDEX idx_source_reviews_recipe ON source_reviews(recipe_id);
+INSERT INTO schema_migrations(version) VALUES(1);
