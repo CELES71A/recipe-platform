@@ -1,6 +1,8 @@
 const $ = selector => document.querySelector(selector);
 let user = null, page = 1, selectedRecipe = null, cooking = null;
 let loadSequence = 0;
+let activeFilters = new URLSearchParams();
+let savingProgress = false;
 function node(tag, text, className) {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
@@ -13,11 +15,12 @@ async function api(path, options = {}) {
     ...options,
     headers: {'Content-Type': 'application/json', 'X-Requested-With': 'recipe-platform', ...options.headers},
   });
-  const data = await response.json();
+  const data = await response.json().catch(() => null);
   if (!response.ok) {
     if (response.status === 401) { user = null; updateAccount(); }
-    throw new Error(data.message || '请求失败，请重试');
+    throw new Error(data?.message || '请求失败，请重试');
   }
+  if (data === null) throw new Error('服务器响应无效，请重试');
   return data;
 }
 function updateAccount() {
@@ -49,21 +52,27 @@ function card(recipe) {
   button.append(content); button.onclick = () => openRecipe(recipe.id).catch(error => notify(error.message));
   return button;
 }
-async function loadRecipes() {
+async function loadRecipes(requestedPage = page) {
   const sequence = ++loadSequence;
   $('#result-count').textContent = '正在查询…';
-  const params = new URLSearchParams();
-  for (const [key, value] of new FormData($('#search-form'))) if (value) params.set(key, value);
-  params.set('page', page);
+  $('#previous').disabled = true;
+  $('#next').disabled = true;
+  const params = new URLSearchParams(activeFilters);
+  params.set('page', requestedPage);
   try {
     const data = await api(`/recipes?${params}`);
     if (sequence !== loadSequence) return;
+    page = data.page;
     $('#recipes').replaceChildren(...data.items.map(card));
     $('#result-count').textContent = data.total ? `找到 ${data.total.toLocaleString()} 道食谱` : '没有找到食谱，试试其他英文关键词或放宽筛选条件。';
     $('#page-label').textContent = `第 ${page} 页`;
     $('#previous').disabled = page === 1;
     $('#next').disabled = page * data.page_size >= data.total;
-  } catch (error) { notify(error.message); $('#result-count').textContent = '查询失败'; }
+  } catch (error) {
+    if (sequence !== loadSequence) return;
+    notify(error.message);
+    $('#result-count').textContent = '查询失败，请重新搜索';
+  }
 }
 function action(text, callback) {
   const button = node('button', text);
@@ -167,10 +176,13 @@ function renderCooking(recipe) {
   $('#pause').textContent = cooking.status === 'paused' ? '继续' : '暂停';
 }
 async function saveProgress(step, status) {
+  if (savingProgress) return;
+  savingProgress = true;
   try {
     cooking = await api(`/me/cooking/${cooking.id}`, {method: 'PATCH', body: JSON.stringify({current_step: step, status, version: cooking.version})});
     renderCooking(selectedRecipe);
   } catch (error) { alert(error.message); }
+  finally { savingProgress = false; }
 }
 $('#step-back').onclick = () => saveProgress(cooking.current_step - 1, 'in_progress');
 $('#step-next').onclick = () => saveProgress(cooking.current_step + 1, 'in_progress');
@@ -204,9 +216,16 @@ $('#status-form').onsubmit = async event => {
   try { await api(`/admin/recipes/${values.id}`, {method: 'PATCH', body: JSON.stringify({status: values.status})}); notify('状态已更新'); }
   catch (error) { notify(error.message); }
 };
-$('#search-form').onsubmit = event => { event.preventDefault(); page = 1; loadRecipes(); };
-$('#previous').onclick = () => { if (page > 1) { page--; loadRecipes(); } };
-$('#next').onclick = () => { page++; loadRecipes(); };
+$('#search-form').onsubmit = event => {
+  event.preventDefault();
+  activeFilters = new URLSearchParams();
+  for (const [key, value] of new FormData(event.currentTarget)) {
+    if (value) activeFilters.set(key, value);
+  }
+  loadRecipes(1);
+};
+$('#previous').onclick = () => { if (page > 1) loadRecipes(page - 1); };
+$('#next').onclick = () => loadRecipes(page + 1);
 async function init() {
   try { user = await api('/auth/me'); } catch { user = null; }
   updateAccount();
