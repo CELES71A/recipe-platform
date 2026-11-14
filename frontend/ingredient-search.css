@@ -1,0 +1,32 @@
+#ingredient-search .ingredient-layout {display:grid;grid-template-columns:minmax(0,3fr) minmax(240px,2fr);gap:24px;align-items:start}
+#ingredient-search .ingredient-picker,#ingredient-search .ingredient-pantry {background:#fff;border:1px solid #dce4d8;border-radius:14px;padding:20px;min-width:0}
+#ingredient-search .ingredient-layout h2 {margin-top:0}
+#ingredient-search #ingredient-form label {flex:1;min-width:0}
+#ingredient-search input[type=search] {width:100%;min-width:0}
+#ingredient-search #ingredient-options {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px}
+#ingredient-search .ingredient-option {display:flex;flex-direction:row;align-items:center;gap:10px;border:1px solid #dce4d8;padding:10px;border-radius:8px;min-height:44px;cursor:pointer;font-size:14px;overflow-wrap:anywhere}
+#ingredient-search .ingredient-option:has(input:checked) {background:#eaf0e5;border-color:#285b42}
+#ingredient-search input[type=checkbox] {width:18px;height:18px;padding:0;margin:0;flex-shrink:0;accent-color:#285b42}
+#ingredient-search #ingredient-selected {list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0}
+#ingredient-search .ingredient-tag {display:flex;align-items:center;gap:8px;background:#eaf0e5;border-radius:8px;padding:5px 8px;max-width:100%;overflow-wrap:anywhere}
+#ingredient-search .ingredient-tag button {padding:6px 8px;flex-shrink:0;min-height:36px}
+#ingredient-search .ingredient-pager {gap:12px;flex-wrap:wrap;padding:20px 0}
+#ingredient-search [hidden] {display:none!important}
+#ingredient-search [role=alert] {color:#9b3d1c;overflow-wrap:anywhere}
+#ingredient-search button:focus-visible,#ingredient-search input:focus-visible {outline:3px solid #285b42;outline-offset:3px}
+#ingredient-search .ingredient-match {min-width:0}
+#ingredient-search .card-content {display:flex;flex-direction:column;flex:1;gap:10px;min-width:0;width:100%;overflow-wrap:anywhere}
+#ingredient-search .card-content h3,#ingredient-search .card-content h4 {margin:0}
+#ingredient-search .match-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 6px}
+#ingredient-search .match-metrics dt {font-size:12px;color:#71806c}
+#ingredient-search .match-metrics dd {margin:6px 0 0;font-weight:700}
+#ingredient-search .match-list {padding-left:20px;margin:0 0 8px}
+#ingredient-search .match-list li {padding:2px;line-height:1.5}
+#ingredient-search .ingredient-detail {margin-top:auto}
+@media(max-width:700px) {
+  #ingredient-search .ingredient-layout {grid-template-columns:minmax(0,1fr)}
+  #ingredient-search .ingredient-picker,#ingredient-search .ingredient-pantry {padding:16px}
+  #ingredient-search #ingredient-form {align-items:stretch}
+  #ingredient-search #ingredient-form label {flex-basis:100%}
+  #ingredient-search #ingredient-matches {grid-template-columns:minmax(0,1fr)}
+}

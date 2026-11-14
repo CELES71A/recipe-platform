@@ -1,0 +1,1224 @@
+{
+  "recorded_at": "2026-11-14T15:33:54.467814+08:00",
+  "database": "stage4_full.db",
+  "entrypoint": "app.main:app",
+  "python": "3.14.6",
+  "sqlite": "3.54.0",
+  "platform": "Darwin arm64",
+  "timing_note": "sequential local HTTP wall time; no cache reset; three samples are not a P95/load test",
+  "lookup": [
+    {
+      "q": "blue",
+      "page": 1,
+      "total": 30,
+      "elapsed_ms": [
+        2.246,
+        1.766,
+        1.773
+      ],
+      "median_ms": 1.773,
+      "query_plan": [
+        {
+          "id": 7,
+          "parent": 0,
+          "notused": 144,
+          "detail": "SCAN ingredients"
+        },
+        {
+          "id": 23,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ]
+    },
+    {
+      "q": "salt",
+      "page": 1,
+      "total": 93,
+      "elapsed_ms": [
+        1.828,
+        1.841,
+        1.767
+      ],
+      "median_ms": 1.828,
+      "query_plan": [
+        {
+          "id": 7,
+          "parent": 0,
+          "notused": 144,
+          "detail": "SCAN ingredients"
+        },
+        {
+          "id": 23,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ]
+    },
+    {
+      "q": "haeo",
+      "page": 1,
+      "total": 1,
+      "elapsed_ms": [
+        1.585,
+        1.541,
+        1.655
+      ],
+      "median_ms": 1.585,
+      "query_plan": [
+        {
+          "id": 7,
+          "parent": 0,
+          "notused": 144,
+          "detail": "SCAN ingredients"
+        },
+        {
+          "id": 23,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ]
+    },
+    {
+      "q": "%",
+      "page": 1,
+      "total": 20,
+      "elapsed_ms": [
+        1.652,
+        1.518,
+        1.518
+      ],
+      "median_ms": 1.518,
+      "query_plan": [
+        {
+          "id": 7,
+          "parent": 0,
+          "notused": 144,
+          "detail": "SCAN ingredients"
+        },
+        {
+          "id": 23,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ]
+    },
+    {
+      "q": "blue",
+      "page": 2,
+      "total": 30,
+      "elapsed_ms": [
+        1.667,
+        1.549,
+        1.529
+      ],
+      "median_ms": 1.549,
+      "query_plan": [
+        {
+          "id": 7,
+          "parent": 0,
+          "notused": 144,
+          "detail": "SCAN ingredients"
+        },
+        {
+          "id": 23,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "case": "common_salt",
+      "input": {
+        "ingredient_ids": [
+          21
+        ],
+        "page": 1,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "salt"
+      ],
+      "total": 190464,
+      "elapsed_ms": [
+        672.429,
+        670.17,
+        670.891
+      ],
+      "median_ms": 670.891,
+      "independent_reference_ms": 1729.819,
+      "page_recipe_ids": [
+        12062,
+        38214,
+        68389,
+        73319,
+        83628,
+        88089,
+        91471,
+        102744,
+        108515,
+        114325,
+        114817,
+        134281
+      ],
+      "all_candidate_order_sha256": "a3d41a7e199f98ab21bc2a58a44aa832581880d95d5e7e104bca476d4359a0d5",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 113,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 19,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 24,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 62,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 72,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 75,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 82,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 123,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 133,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 136,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 158,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 12062,
+        "name": "Roasted pumpkin seeds",
+        "required_count": 1,
+        "matched_count": 1,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 21,
+            "name": "salt"
+          }
+        ],
+        "missing_ingredients": []
+      }
+    },
+    {
+      "case": "common_sugar",
+      "input": {
+        "ingredient_ids": [
+          30
+        ],
+        "page": 1,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "sugar"
+      ],
+      "total": 102808,
+      "elapsed_ms": [
+        392.823,
+        390.45,
+        389.297
+      ],
+      "median_ms": 390.45,
+      "independent_reference_ms": 1638.018,
+      "page_recipe_ids": [
+        2807,
+        8910,
+        11859,
+        14559,
+        15014,
+        15982,
+        16854,
+        21117,
+        22263,
+        22362,
+        31333,
+        33415
+      ],
+      "all_candidate_order_sha256": "8d0d70d20cb9e06552c7808bdb8d1eb55a1dca0a5f814c5fba4911ab038a81ba",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 113,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 19,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 24,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 62,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 72,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 75,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 82,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 123,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 133,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 136,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 158,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 2807,
+        "name": "Peachy Cheesecake",
+        "required_count": 1,
+        "matched_count": 1,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 30,
+            "name": "sugar"
+          }
+        ],
+        "missing_ingredients": []
+      }
+    },
+    {
+      "case": "rare",
+      "input": {
+        "ingredient_ids": [
+          70
+        ],
+        "page": 1,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "haeo"
+      ],
+      "total": 1,
+      "elapsed_ms": [
+        1.904,
+        1.39,
+        1.203
+      ],
+      "median_ms": 1.39,
+      "independent_reference_ms": 1475.884,
+      "page_recipe_ids": [
+        46
+      ],
+      "all_candidate_order_sha256": "5c441ccce965fb3da22f42aa850da25c6c9c85fe3ff43a24aeed2cacfda4926b",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 113,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 19,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 24,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 62,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 72,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 75,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 82,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 123,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 133,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 136,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 158,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 46,
+        "name": "A Jad - Cucumber Pickle",
+        "required_count": 2,
+        "matched_count": 1,
+        "missing_count": 1,
+        "coverage": 0.5,
+        "matched_ingredients": [
+          {
+            "id": 70,
+            "name": "haeo"
+          }
+        ],
+        "missing_ingredients": [
+          {
+            "id": 69,
+            "name": "rice vinegar"
+          }
+        ]
+      }
+    },
+    {
+      "case": "multiple",
+      "input": {
+        "ingredient_ids": [
+          9,
+          21,
+          30
+        ],
+        "page": 1,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "garlic",
+        "salt",
+        "sugar"
+      ],
+      "total": 261295,
+      "elapsed_ms": [
+        1034.578,
+        1052.061,
+        1031.819
+      ],
+      "median_ms": 1034.578,
+      "independent_reference_ms": 2034.768,
+      "page_recipe_ids": [
+        152,
+        2807,
+        8910,
+        11859,
+        12062,
+        12501,
+        14559,
+        15014,
+        15982,
+        16854,
+        21117,
+        22263
+      ],
+      "all_candidate_order_sha256": "5caf27d7f8943d64b0e7da646642beb178bfc14dd48da9a5bfd8597efbf673a7",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 129,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 34,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 39,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 78,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 88,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 91,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 98,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 139,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 149,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 152,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 174,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 152,
+        "name": "Angel Food Cake Waldorf",
+        "required_count": 2,
+        "matched_count": 2,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 21,
+            "name": "salt"
+          },
+          {
+            "id": 30,
+            "name": "sugar"
+          }
+        ],
+        "missing_ingredients": []
+      }
+    },
+    {
+      "case": "multiple_page2",
+      "input": {
+        "ingredient_ids": [
+          9,
+          21,
+          30
+        ],
+        "page": 2,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "garlic",
+        "salt",
+        "sugar"
+      ],
+      "total": 261295,
+      "elapsed_ms": [
+        1034.047,
+        1030.814,
+        1032.649
+      ],
+      "median_ms": 1032.649,
+      "independent_reference_ms": 0.001,
+      "page_recipe_ids": [
+        22362,
+        31333,
+        33415,
+        34444,
+        38214,
+        38799,
+        38973,
+        39425,
+        41035,
+        44808,
+        45079,
+        45454
+      ],
+      "all_candidate_order_sha256": "5caf27d7f8943d64b0e7da646642beb178bfc14dd48da9a5bfd8597efbf673a7",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 129,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 34,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 39,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 78,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 88,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 91,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 98,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 139,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 149,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 152,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 174,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 22362,
+        "name": "Passover Almond Macaroons",
+        "required_count": 1,
+        "matched_count": 1,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 30,
+            "name": "sugar"
+          }
+        ],
+        "missing_ingredients": []
+      }
+    },
+    {
+      "case": "recipe38_full",
+      "input": {
+        "ingredient_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "page": 1,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "blueberries",
+        "granulated sugar",
+        "vanilla yogurt",
+        "lemon juice"
+      ],
+      "total": 48970,
+      "elapsed_ms": [
+        262.773,
+        261.061,
+        260.962
+      ],
+      "median_ms": 261.061,
+      "independent_reference_ms": 1624.76,
+      "page_recipe_ids": [
+        38,
+        32798,
+        34089,
+        34135,
+        34810,
+        36020,
+        42267,
+        52287,
+        52894,
+        54578,
+        55815,
+        56166
+      ],
+      "all_candidate_order_sha256": "7302d8c52b49185c18b56f01425b983d05f9ed0afcf155adcccba670d540a53a",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 133,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 37,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 42,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 81,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 91,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 94,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 101,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 142,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 152,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 155,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 177,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 38,
+        "name": "Low-Fat Berry Blue Frozen Dessert",
+        "required_count": 4,
+        "matched_count": 4,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 1,
+            "name": "blueberries"
+          },
+          {
+            "id": 2,
+            "name": "granulated sugar"
+          },
+          {
+            "id": 3,
+            "name": "vanilla yogurt"
+          },
+          {
+            "id": 4,
+            "name": "lemon juice"
+          }
+        ],
+        "missing_ingredients": []
+      },
+      "duplicate_input_identical": true,
+      "different_size_full_coverage_id_order": [
+        {
+          "id": 38,
+          "required_count": 4
+        },
+        {
+          "id": 32798,
+          "required_count": 1
+        },
+        {
+          "id": 34089,
+          "required_count": 1
+        },
+        {
+          "id": 34135,
+          "required_count": 1
+        },
+        {
+          "id": 34810,
+          "required_count": 1
+        },
+        {
+          "id": 36020,
+          "required_count": 1
+        },
+        {
+          "id": 42267,
+          "required_count": 1
+        },
+        {
+          "id": 52287,
+          "required_count": 1
+        },
+        {
+          "id": 52894,
+          "required_count": 1
+        },
+        {
+          "id": 54578,
+          "required_count": 1
+        },
+        {
+          "id": 55815,
+          "required_count": 1
+        },
+        {
+          "id": 56166,
+          "required_count": 1
+        }
+      ],
+      "recipe38": {
+        "id": 38,
+        "name": "Low-Fat Berry Blue Frozen Dessert",
+        "required_count": 4,
+        "matched_count": 4,
+        "missing_count": 0,
+        "coverage": 1.0,
+        "matched_ingredients": [
+          {
+            "id": 1,
+            "name": "blueberries"
+          },
+          {
+            "id": 2,
+            "name": "granulated sugar"
+          },
+          {
+            "id": 3,
+            "name": "vanilla yogurt"
+          },
+          {
+            "id": 4,
+            "name": "lemon juice"
+          }
+        ],
+        "missing_ingredients": []
+      }
+    },
+    {
+      "case": "recipe38_partial",
+      "input": {
+        "ingredient_ids": [
+          1,
+          2
+        ],
+        "page": 18,
+        "page_size": 12
+      },
+      "ingredient_names": [
+        "blueberries",
+        "granulated sugar"
+      ],
+      "total": 17958,
+      "elapsed_ms": [
+        114.846,
+        113.37,
+        112.412
+      ],
+      "median_ms": 113.37,
+      "independent_reference_ms": 1500.607,
+      "page_recipe_ids": [
+        529852,
+        530589,
+        532473,
+        534401,
+        534574,
+        535499,
+        536099,
+        539387,
+        38,
+        53600,
+        413886,
+        455276
+      ],
+      "all_candidate_order_sha256": "f9d382e2ba3b6737f7bffe46653933be6934956f250c5f934f0e1f70a7a42233",
+      "independent_order_counts_details_verified": true,
+      "query_plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE counts"
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "notused": 0,
+          "detail": "CO-ROUTINE matched"
+        },
+        {
+          "id": 12,
+          "parent": 4,
+          "notused": 123,
+          "detail": "SEARCH ri USING INDEX idx_recipe_ingredients_ingredient (ingredient_id=?)"
+        },
+        {
+          "id": 31,
+          "parent": 4,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 36,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 75,
+          "parent": 4,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 85,
+          "parent": 2,
+          "notused": 82,
+          "detail": "SCAN m"
+        },
+        {
+          "id": 88,
+          "parent": 2,
+          "notused": 60,
+          "detail": "SEARCH needed USING INDEX sqlite_autoindex_recipe_ingredients_1 (recipe_id=?)"
+        },
+        {
+          "id": 95,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR GROUP BY"
+        },
+        {
+          "id": 136,
+          "parent": 2,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR count(DISTINCT)"
+        },
+        {
+          "id": 146,
+          "parent": 0,
+          "notused": 82,
+          "detail": "SCAN c"
+        },
+        {
+          "id": 149,
+          "parent": 0,
+          "notused": 44,
+          "detail": "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        },
+        {
+          "id": 171,
+          "parent": 0,
+          "notused": 0,
+          "detail": "USE TEMP B-TREE FOR ORDER BY"
+        }
+      ],
+      "first_item": {
+        "id": 529852,
+        "name": "Pomegranate Molasses",
+        "required_count": 2,
+        "matched_count": 1,
+        "missing_count": 1,
+        "coverage": 0.5,
+        "matched_ingredients": [
+          {
+            "id": 2,
+            "name": "granulated sugar"
+          }
+        ],
+        "missing_ingredients": [
+          {
+            "id": 18,
+            "name": "fresh lemon juice"
+          }
+        ]
+      },
+      "recipe38": {
+        "id": 38,
+        "name": "Low-Fat Berry Blue Frozen Dessert",
+        "required_count": 4,
+        "matched_count": 2,
+        "missing_count": 2,
+        "coverage": 0.5,
+        "matched_ingredients": [
+          {
+            "id": 1,
+            "name": "blueberries"
+          },
+          {
+            "id": 2,
+            "name": "granulated sugar"
+          }
+        ],
+        "missing_ingredients": [
+          {
+            "id": 3,
+            "name": "vanilla yogurt"
+          },
+          {
+            "id": 4,
+            "name": "lemon juice"
+          }
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "recipes": 522517,
+    "ingredients": 7309,
+    "recipe_ingredients": 4131652,
+    "recipe_steps": 3468449,
+    "source_reviews": 1401963,
+    "quarantined_reviews": 19
+  },
+  "migrations": [
+    1,
+    2
+  ],
+  "statuses": {
+    "published": 522517
+  },
+  "integrity_check": [
+    "ok"
+  ],
+  "foreign_key_violations": 0,
+  "rare_ingredient": {
+    "id": 70,
+    "name": "haeo",
+    "published_recipe_count": 1
+  },
+  "recipe38_detail_verified": true
+}

@@ -1,0 +1,27 @@
+{
+  "scope": "all",
+  "zero_ratings": 76247,
+  "unselected_reviews": 0,
+  "recipe_errors": 0,
+  "quantity_mismatches": 407532,
+  "categories": 311,
+  "recipes": 522517,
+  "ingredients": 7309,
+  "recipe_steps": 3468449,
+  "recipe_ingredients": 4131652,
+  "source_recipe_records": 522517,
+  "source_reviews": 1401963,
+  "quarantined_reviews": 19,
+  "preparation_seconds": 51.3,
+  "integrity_check": "ok",
+  "foreign_key_violations": 0,
+  "database_counts": {
+    "recipes": 522517,
+    "recipe_steps": 3468449,
+    "recipe_ingredients": 4131652,
+    "ingredients": 7309,
+    "source_reviews": 1401963,
+    "quarantined_reviews": 19
+  },
+  "elapsed_seconds": 131.4
+}
