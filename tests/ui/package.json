@@ -1,0 +1,12 @@
+{
+  "name": "recipe-ingredient-ui-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DOM-only integration test tools; no frontend build dependency",
+  "devDependencies": {
+    "jsdom": "31.0.1"
+  },
+  "engines": {
+    "node": ">=26"
+  }
+}

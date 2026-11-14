@@ -218,6 +218,9 @@ def change_status(recipe_id: int,data: RecipeStatus,user=Depends(current_user)):
         if not db.execute('UPDATE recipes SET status=? WHERE id=?',(data.status,recipe_id)).rowcount:
             raise HTTPException(404,'食谱不存在')
     return {'ok':True}
+from .ingredient_routes import router as ingredient_router
+app.include_router(ingredient_router)
+
 app.mount('/',StaticFiles(directory=ROOT/'frontend',html=True),name='frontend')
 
 

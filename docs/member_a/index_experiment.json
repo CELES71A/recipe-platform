@@ -1,0 +1,73 @@
+{
+  "salt": {
+    "input": [
+      21
+    ],
+    "elapsed_ms": {
+      "before": [
+        678.898,
+        676.881,
+        669.129
+      ],
+      "covering_indexes": [
+        468.986,
+        464.307,
+        462.895
+      ]
+    },
+    "median_ms": {
+      "before": 676.881,
+      "covering_indexes": 464.307
+    },
+    "identical_response": true
+  },
+  "multiple": {
+    "input": [
+      9,
+      21,
+      30
+    ],
+    "elapsed_ms": {
+      "before": [
+        1038.522,
+        1038.527,
+        1036.818
+      ],
+      "covering_indexes": [
+        1144.962,
+        1141.673,
+        1143.457
+      ]
+    },
+    "median_ms": {
+      "before": 1038.522,
+      "covering_indexes": 1143.457
+    },
+    "identical_response": true
+  },
+  "full38": {
+    "input": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "elapsed_ms": {
+      "before": [
+        261.593,
+        260.854,
+        259.713
+      ],
+      "covering_indexes": [
+        167.233,
+        168.417,
+        168.815
+      ]
+    },
+    "median_ms": {
+      "before": 260.854,
+      "covering_indexes": 168.417
+    },
+    "identical_response": true
+  }
+}

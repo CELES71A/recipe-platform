@@ -201,3 +201,9 @@ $env:APP_DB_PATH = 'data/sample.db'
 
 详细检查范围见 docs/database_design.md。运行完成后使用 Ctrl+C 停止测试服务。正式使用时清除测试终端的 APP_DB_PATH，或重新打开终端，以免连到 sample.db。
 
+## 11. 成员 A：食材找菜
+
+导航「食材找菜」支持搜索／分页选择已有食材、可移除标签、匹配与缺少清单、覆盖率和食谱详情。两个接口为 `GET /api/v1/ingredients` 与 `POST /api/v1/recipe-matches`，默认后端入口已注册，无前端构建步骤。
+
+见 [完整复现与交付说明](docs/member_a/README.md)、[接口示例](docs/member_a/api.md)、[验收与全量摘要](docs/member_a/verification.md)、[录屏步骤](docs/member_a/demo.md)。从新克隆可用 `scripts/prepare_ingredient_fixtures.py` 从外部 CSV 生成所有本地测试前置文件；无需复制成员电脑上的忽略目录。Python 参考依赖见 `backend/requirements-locked.txt`；DOM 测试依赖单独锁定于 `tests/ui/`，运行页面不需要 npm。
+

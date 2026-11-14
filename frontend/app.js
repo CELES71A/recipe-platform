@@ -1,3 +1,5 @@
+import {initIngredientSearch} from './ingredient-search.js';
+
 const $ = selector => document.querySelector(selector);
 let user = null, page = 1, selectedRecipe = null, cooking = null;
 let loadSequence = 0;
@@ -35,7 +37,9 @@ function requireLogin() {
   return false;
 }
 function showSection(id) {
-  for (const name of ['browse', 'personal', 'administration']) $(`#${name}`).hidden = name !== id;
+  for (const name of ['browse', 'personal', 'administration', 'ingredient-search']) $(`#${name}`).hidden = name !== id;
+  if (id === 'ingredient-search') $('#ingredient-nav').setAttribute('aria-current', 'page');
+  else $('#ingredient-nav').removeAttribute('aria-current');
   notify();
 }
 function minutes(value) { return value == null ? '时长未知' : `${Math.ceil(value / 60)} 分钟`; }
@@ -192,6 +196,8 @@ $('#close-cook').onclick = () => { $('#cook-dialog').close(); if (!$('#personal'
 $('#close-detail').onclick = () => $('#detail-dialog').close();
 $('#close-auth').onclick = () => $('#auth-dialog').close();
 $('#home').onclick = () => { showSection('browse'); loadRecipes(); };
+const ingredientSearch = initIngredientSearch({api, openRecipe});
+$('#ingredient-nav').onclick = () => { showSection('ingredient-search'); ingredientSearch.activate(); };
 $('#my').onclick = personal;
 $('#account').onclick = () => { if (user) personal(); else $('#auth-dialog').showModal(); };
 $('#auth-form').onsubmit = async event => {
