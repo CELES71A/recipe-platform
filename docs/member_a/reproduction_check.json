@@ -1,0 +1,45 @@
+{
+  "source_commit": "97bdf95588e4597a54735e9dcf4a1d80a2e7a83e",
+  "fresh_clone_initial_ignored_paths_absent": [
+    "data",
+    ".venv",
+    "tests/ui/node_modules"
+  ],
+  "python": "3.14.6",
+  "python_dependencies": "backend/requirements-locked.txt; fresh venv install and pip check passed",
+  "node": "26.4.0",
+  "ui_dependencies": "npm ci --prefix tests/ui; jsdom 31.0.1",
+  "generated_from_external_csv": true,
+  "fixtures": {
+    "recipes": 100,
+    "ingredients": 335,
+    "recipe_ingredients": 900,
+    "recipe_steps": 872,
+    "source_reviews": 815
+  },
+  "api": {
+    "entrypoint": "app.main:app",
+    "groups": 12,
+    "http_requests": 119,
+    "failures": 0,
+    "regressions": {
+      "baseline_13": {
+        "exit_code": 0,
+        "result": "PASS: 13 baseline HTTP checks"
+      },
+      "smoke_33": {
+        "exit_code": 0,
+        "result": "PASS: 33 HTTP checks"
+      }
+    }
+  },
+  "dom": {
+    "groups": 15,
+    "failures": 0,
+    "real_http_responses": 47,
+    "simulated_network_failures": 3,
+    "browser_rendering": false
+  },
+  "all_test_servers_stopped": true,
+  "source_and_fixture_databases_unchanged": true
+}
